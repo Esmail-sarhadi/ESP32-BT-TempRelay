@@ -1,155 +1,292 @@
-
 <!DOCTYPE html>
 <html lang="en-US">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="vqq11CWNVkLVnZvjCeZReKc8-FRmgxek2SOWjr35CbY" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>ESP32-BT-TempRelay | ESP32-based Bluetooth temperature and humidity monitoring system with relay control. This project uses Bluetooth communication to send sensor data from a DHT11 sensor and allows remote control of a relay via Bluetooth commands.</title>
-<meta name="generator" content="Jekyll v3.9.5" />
-<meta property="og:title" content="ESP32-BT-TempRelay" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="ESP32-based Bluetooth temperature and humidity monitoring system with relay control. This project uses Bluetooth communication to send sensor data from a DHT11 sensor and allows remote control of a relay via Bluetooth commands." />
-<meta property="og:description" content="ESP32-based Bluetooth temperature and humidity monitoring system with relay control. This project uses Bluetooth communication to send sensor data from a DHT11 sensor and allows remote control of a relay via Bluetooth commands." />
-<link rel="canonical" href="https://esmail-sarhadi.github.io/ESP32-BT-TempRelay/" />
-<meta property="og:url" content="https://esmail-sarhadi.github.io/ESP32-BT-TempRelay/" />
-<meta property="og:site_name" content="ESP32-BT-TempRelay" />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="ESP32-BT-TempRelay" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"ESP32-based Bluetooth temperature and humidity monitoring system with relay control. This project uses Bluetooth communication to send sensor data from a DHT11 sensor and allows remote control of a relay via Bluetooth commands.","headline":"ESP32-BT-TempRelay","name":"ESP32-BT-TempRelay","url":"https://esmail-sarhadi.github.io/ESP32-BT-TempRelay/"}</script>
-<!-- End Jekyll SEO tag -->
-
-    <link rel="stylesheet" href="/ESP32-BT-TempRelay/assets/css/style.css?v=7d1755365792f29832805dcb37ba2e1cf13e38e9">
-    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
-
-<!-- Setup Google Analytics -->
-
-
-
-<!-- You can set your favicon here -->
-<!-- link rel="shortcut icon" type="image/x-icon" href="/ESP32-BT-TempRelay/favicon.ico" -->
-
-<!-- end custom head snippets -->
-
-  </head>
-  <body>
-    <div class="container-lg px-3 my-5 markdown-body">
-      
-
-      <h1 id="esp32-bt-temprelay">ESP32-BT-TempRelay</h1>
-
-<p>This project implements a Bluetooth-based temperature and humidity monitoring system with relay control using an ESP32 microcontroller. It utilizes a DHT11 sensor for environmental 
-measurements and allows remote control of a relay through Bluetooth commands.</p>
-
-<p><img src="/ESP32-BT-TempRelay/Scenario.jpg" alt="Alt text" /></p>
-
-<h2 id="features">Features</h2>
-
-<ul>
-  <li>Bluetooth communication</li>
-  <li>Temperature and humidity monitoring using DHT11 sensor</li>
-  <li>Remote relay control via Bluetooth</li>
-  <li>Periodic sensor data transmission</li>
-  <li>PIN-based Bluetooth security</li>
-</ul>
-
-<h2 id="hardware-requirements">Hardware Requirements</h2>
-
-<ul>
-  <li>ESP32 development board</li>
-  <li>DHT11 temperature and humidity sensor</li>
-  <li>Relay module</li>
-  <li>Appropriate power supply</li>
-</ul>
-
-<h2 id="software-dependencies">Software Dependencies</h2>
-
-<ul>
-  <li>Arduino IDE</li>
-  <li>ESP32 board support for Arduino</li>
-  <li>BluetoothSerial library</li>
-  <li>DHT sensor library</li>
-</ul>
-
-<h2 id="installation">Installation</h2>
-
-<ol>
-  <li>Install the Arduino IDE and ESP32 board support.</li>
-  <li>Install the required libraries:
-    <ul>
-      <li>BluetoothSerial (comes with ESP32 board support)</li>
-      <li>DHT sensor library</li>
-    </ul>
-  </li>
-  <li>Clone this repository or download the source code.</li>
-  <li>Open the <code class="language-plaintext highlighter-rouge">.ino</code> file in Arduino IDE.</li>
-</ol>
-
-<h2 id="configuration">Configuration</h2>
-
-<ul>
-  <li>Set the Bluetooth device name in <code class="language-plaintext highlighter-rouge">SerialBT.begin("MyESP32")</code>.</li>
-  <li>Modify the PIN code in <code class="language-plaintext highlighter-rouge">char *pin = "6622"</code> if desired.</li>
-  <li>Configure the DHT sensor pin in <code class="language-plaintext highlighter-rouge">#define DHTPIN 4</code>.</li>
-  <li>Set the relay control pin in <code class="language-plaintext highlighter-rouge">int pinRelay = 5</code>.</li>
-  <li>Adjust the data sending interval in <code class="language-plaintext highlighter-rouge">const long interval = 5000</code>.</li>
-</ul>
-
-<h2 id="usage">Usage</h2>
-
-<ol>
-  <li>Upload the code to your ESP32.</li>
-  <li>Power on the device.</li>
-  <li>Pair your Bluetooth-enabled device (e.g., smartphone) with the ESP32 using the PIN code.</li>
-  <li>Once connected, the ESP32 will start sending temperature and humidity data every 5 seconds.</li>
-  <li>Send “Relay_on” or “Relay_off” from your Bluetooth device to control the relay.</li>
-</ol>
-
-<h2 id="bluetooth-commands">Bluetooth Commands</h2>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">Relay_on</code>: Turn on the relay</li>
-  <li><code class="language-plaintext highlighter-rouge">Relay_off</code>: Turn off the relay</li>
-</ul>
-
-<h2 id="serial-monitor">Serial Monitor</h2>
-
-<p>The device also prints all Bluetooth communication to the Serial Monitor, allowing for easy debugging and monitoring.</p>
-
-<h2 id="contributing">Contributing</h2>
-
-<p>Contributions to improve the project are welcome. Please feel free to submit a Pull Request.</p>
-<h2 id="profile">Profile</h2>
-
-<p>Check out my GitHub profile: <a href="https://github.com/Esmail-sarhadi" target="_blank">Esmail Sarhadi</a></p>
-
-<h2 id="project-link">Project Link</h2>
-
-<p>View this project on GitHub: <a href="https://github.com/Esmail-sarhadi/ESP32-BT-TempRelay" target="_blank">ESP32-BT-TempRelay</a></p>
-
-<h2 id="donation">Donation</h2>
-
-<p>If you find this project helpful, consider making a donation:</p>
-<p><a href="https://nowpayments.io/donation?api_key=REWCYVC-A1AMFK3-QNRS663-PKJSBD2&source=lk_donation&medium=referral" target="_blank">
-     <img src="https://nowpayments.io/images/embeds/donation-button-black.svg" alt="Crypto donation button by NOWPayments">
-</a></p>
-<h2 id="license">License</h2>
-
-<p>This project is open-source and available under the <a href="/ESP32-BT-TempRelay/LICENSE">MIT License</a>.</p>
-
-
-      
-      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
-        This site is open source. <a href="https://github.com/Esmail-sarhadi/ESP32-BT-TempRelay/edit/main/README.md">Improve this page</a>.
-      </div>
-      
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32-BT-TempRelay 🌡️🔌</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+        
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #f3f3f3;
+            --card-background: white;
+            --text-color: #333;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(45deg, var(--background-color), #e6e6e6);
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            perspective: 1000px;
+        }
+        
+        h1, h2 {
+            color: var(--secondary-color);
+            text-align: center;
+            transform: translateZ(50px);
+            transition: transform 0.3s ease;
+        }
+        
+        h1:hover, h2:hover {
+            transform: translateZ(75px) scale(1.05);
+        }
+        
+        .card {
+            background: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px) rotateX(5deg);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        img:hover {
+            transform: scale(1.05);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .emoji {
+            font-size: 1.5em;
+            margin: 0 5px;
+            display: inline-block;
+            animation: bounce 0.6s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes rotate3D {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+        
+        .rotate3D {
+            animation: rotate3D 10s linear infinite;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            h2 {
+                font-size: 20px;
+            }
+        }
+        
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: #3498db;
+                --secondary-color: #ecf0f1;
+                --background-color: #2c3e50;
+                --card-background: #34495e;
+                --text-color: #ecf0f1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-switch">
+        <a href="index_fa.html" class="btn">🇮🇷 فارسی</a>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
-    <script>anchors.add();</script>
-  </body>
+    
+    <div class="container">
+        <h1 class="rotate3D">ESP32-BT-TempRelay <span class="emoji">🌡️</span><span class="emoji">🔌</span></h1>
+        
+        <div class="card">
+            <p>This project implements a Bluetooth-based temperature and humidity monitoring system with relay control using an ESP32 microcontroller. It utilizes a DHT11 sensor for environmental measurements and allows remote control of a relay through Bluetooth commands. <span class="emoji">🤖</span></p>
+        </div>
+        
+        <img src="/ESP32-BT-TempRelay/Scenario.jpg" alt="Project Scenario" />
+        
+        <h2>Features <span class="emoji">✨</span></h2>
+        <div class="card">
+            <ul>
+                <li>Bluetooth communication <span class="emoji">📡</span></li>
+                <li>Temperature and humidity monitoring using DHT11 sensor <span class="emoji">🌡️💧</span></li>
+                <li>Remote relay control via Bluetooth <span class="emoji">🎛️</span></li>
+                <li>Periodic sensor data transmission <span class="emoji">⏱️</span></li>
+                <li>PIN-based Bluetooth security <span class="emoji">🔒</span></li>
+            </ul>
+        </div>
+        
+        <h2>Hardware Requirements <span class="emoji">🛠️</span></h2>
+        <div class="card">
+            <ul>
+                <li>ESP32 development board <span class="emoji">🖥️</span></li>
+                <li>DHT11 temperature and humidity sensor <span class="emoji">🌡️</span></li>
+                <li>Relay module <span class="emoji">🔌</span></li>
+                <li>Appropriate power supply <span class="emoji">🔋</span></li>
+            </ul>
+        </div>
+        
+        <h2>Software Dependencies <span class="emoji">💻</span></h2>
+        <div class="card">
+            <ul>
+                <li>Arduino IDE <span class="emoji">🔧</span></li>
+                <li>ESP32 board support for Arduino <span class="emoji">�board</span></li>
+                <li>BluetoothSerial library <span class="emoji">📚</span></li>
+                <li>DHT sensor library <span class="emoji">📊</span></li>
+            </ul>
+        </div>
+        
+        <h2>Installation <span class="emoji">🔧</span></h2>
+        <div class="card">
+            <ol>
+                <li>Install the Arduino IDE and ESP32 board support.</li>
+                <li>Install the required libraries:
+                    <ul>
+                        <li>BluetoothSerial (comes with ESP32 board support)</li>
+                        <li>DHT sensor library</li>
+                    </ul>
+                </li>
+                <li>Clone this repository or download the source code.</li>
+                <li>Open the <code>.ino</code> file in Arduino IDE.</li>
+            </ol>
+        </div>
+        
+        <h2>Configuration <span class="emoji">⚙️</span></h2>
+        <div class="card">
+            <ul>
+                <li>Set the Bluetooth device name in <code>SerialBT.begin("MyESP32")</code>.</li>
+                <li>Modify the PIN code in <code>char *pin = "6622"</code> if desired.</li>
+                <li>Configure the DHT sensor pin in <code>#define DHTPIN 4</code>.</li>
+                <li>Set the relay control pin in <code>int pinRelay = 5</code>.</li>
+                <li>Adjust the data sending interval in <code>const long interval = 5000</code>.</li>
+            </ul>
+        </div>
+        
+        <h2>Usage <span class="emoji">🚀</span></h2>
+        <div class="card">
+            <ol>
+                <li>Upload the code to your ESP32.</li>
+                <li>Power on the device.</li>
+                <li>Pair your Bluetooth-enabled device (e.g., smartphone) with the ESP32 using the PIN code.</li>
+                <li>Once connected, the ESP32 will start sending temperature and humidity data every 5 seconds.</li>
+                <li>Send "Relay_on" or "Relay_off" from your Bluetooth device to control the relay.</li>
+            </ol>
+        </div>
+        
+        <h2>Bluetooth Commands <span class="emoji">📲</span></h2>
+        <div class="card">
+            <ul>
+                <li><code>Relay_on</code>: Turn on the relay</li>
+                <li><code>Relay_off</code>: Turn off the relay</li>
+            </ul>
+        </div>
+        
+        <h2>Serial Monitor <span class="emoji">🖥️</span></h2>
+        <div class="card">
+            <p>The device also prints all Bluetooth communication to the Serial Monitor, allowing for easy debugging and monitoring.</p>
+        </div>
+        
+        <h2>Contributing <span class="emoji">🤝</span></h2>
+        <div class="card">
+            <p>Contributions to improve the project are welcome. Please feel free to submit a Pull Request.</p>
+        </div>
+        
+        <h2>Profile <span class="emoji">👤</span></h2>
+        <div class="card">
+            <p>Check out my GitHub profile: <a href="https://github.com/Esmail-sarhadi" target="_blank">Esmail Sarhadi</a></p>
+        </div>
+        
+        <h2>Project Link <span class="emoji">🔗</span></h2>
+        <div class="card">
+            <p>View this project on GitHub: <a href="https://github.com/Esmail-sarhadi/ESP32-BT-TempRelay" target="_blank">ESP32-BT-TempRelay</a></p>
+        </div>
+        
+        <h2>Donation <span class="emoji">💖</span></h2>
+        <div class="card">
+            <p>If you find this project helpful, consider making a donation:</p>
+            <a href="https://nowpayments.io/donation?api_key=REWCYVC-A1AMFK3-QNRS663-PKJSBD2&source=lk_donation&medium=referral" target="_blank" class="btn">
+                Donate Now <span class="emoji">🙏</span>
+            </a>
+        </div>
+        
+        <h2>License <span class="emoji">📄</span></h2>
+        <div class="card">
+            <p>This project is open-source and available under the <a href="/ESP32-BT-TempRelay/LICENSE">MIT License</a>.</p>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            });
+            
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
 </html>
